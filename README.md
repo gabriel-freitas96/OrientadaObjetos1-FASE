@@ -58,7 +58,7 @@ mídias no catálogo, cria uma playlist e mostra na tela:
 1.  Clone este repositório:
 
     ``` bash
-    git clone https://github.com/seu-usuario/projeto-playlist-java.git
+    git clone (https://github.com/gabriel-freitas96/OrientadaObjetos1-FASE.git)
     ```
 
 2.  Entre no diretório do projeto:
