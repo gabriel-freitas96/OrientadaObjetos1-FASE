@@ -96,7 +96,5 @@ mídias no catálogo, cria uma playlist e mostra na tela:
 
 ## 👨‍💻 Autor
 
-Desenvolvido com 💙 por **\[Seu Nome\]**\
-📧 <seu.email@exemplo.com>\
-🔗 [LinkedIn](https://linkedin.com/in/seu-usuario) \|
-[GitHub](https://github.com/seu-usuario)
+Desenvolvido com 💙 por **\[Gabriel Lacerda,Samires do Carmo,Henry Galdino,Miguel Viana\]**\
+
