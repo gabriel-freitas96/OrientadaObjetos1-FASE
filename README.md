@@ -1,100 +1,89 @@
-# 🎶 Sistema de Playlists em Java
+# 🎵 Projeto: Sistema de Gerenciamento de Playlists Musicais
 
-Um projeto simples em **Java** que permite gerenciar **usuários, mídias
-(músicas, podcasts e audiobooks), playlists e catálogo de músicas**.\
-Este sistema foi construído com base em **requisitos funcionais
-mínimos** de um aplicativo de streaming.
+Este projeto é uma aplicação simples em Java que permite gerenciar usuários, mídias (músicas, podcasts e audiobooks), playlists e um catálogo de mídias. Ideal para aprendizado de conceitos de orientação a objetos.
 
-------------------------------------------------------------------------
+---
 
-## ✨ Funcionalidades
+## 🚀 Funcionalidades
 
-✅ Cadastro de **usuários** com nome e e-mail\
-✅ Criação e gerenciamento de **playlists** (adicionar, remover e
-visualizar mídias)\
-✅ Suporte a diferentes tipos de **mídias**: Música, Podcast e
-Audiobook\
-✅ Atributos das mídias: título, artista, duração e gênero\
-✅ Enumeração de **gêneros musicais** (ROCK, POP, MPB, JAZZ, CLÁSSICA,
-etc.)\
-✅ **Catálogo geral** de mídias disponíveis\
-✅ Busca de mídias por **título, artista ou gênero**\
-✅ Cálculo da **duração total da playlist**
+### 👤 Usuário
+- Cadastro com nome e e-mail.
+- Criação e gerenciamento de playlists.
+- Adição e remoção de músicas nas suas playlists.
+- Visualização de playlists e das músicas contidas.
 
-------------------------------------------------------------------------
+### 🎧 Mídias
+- Tipos: músicas, podcasts ou audiobooks.
+- Atributos: título, artista, duração e gênero.
+- Armazenadas em um catálogo geral disponível para todos os usuários.
 
-## 📂 Estrutura do Projeto
+### 📂 Playlist
+- Contém apenas **nomes das músicas** (referência às mídias do catálogo).
+- Pertence a um único usuário.
+- Capaz de calcular a duração total da playlist.
+- Permite visualizar detalhes das músicas e da playlist.
 
-    src/
-     ├── App.java        # Classe principal (main)
-     ├── Usuario.java    # Representa o usuário do sistema
-     ├── Playlist.java   # Representa playlists de um usuário
-     ├── Midia.java      # Classe abstrata para Música, Podcast e Audiobook
-     ├── Musica.java
-     ├── Podcast.java
-     ├── Audiobook.java
-     ├── Catalogo.java   # Repositório geral de mídias
-     └── Genero.java     # Enumeração dos gêneros musicais
+### 🎼 Gêneros Musicais
+- Implementado com uma enumeração `Genero`, com valores como:  
+  `ROCK`, `POP`, `MPB`, `JAZZ`, `CLASSICA`, etc.
 
-------------------------------------------------------------------------
+---
 
-## 🖥️ Exemplo de Uso
+## 📦 Estrutura de Classes
 
-Ao rodar a aplicação (`App.java`), o sistema cria um usuário, cadastra
-mídias no catálogo, cria uma playlist e mostra na tela:
+- `Usuario` – Representa um usuário com nome, e-mail e suas playlists.
+- `Playlist` – Representa uma playlist com nome, dono e músicas (nomes).
+- `Midia` – Representa uma mídia com título, artista, duração, gênero e tipo.
+- `Catalogo` – Contém todas as mídias disponíveis no sistema.
+- `Genero` – Enumeração com os gêneros musicais disponíveis.
 
-    Playlist: Favoritas 🎧
-     - [Música] Pais e Filhos - Legião Urbana (4:59, ROCK)
-     - [Música] Garota de Ipanema - Tom Jobim (4:15, MPB)
-    Duração total: 9:14
+---
 
-    Busca por artista 'Tom Jobim':
-     - [Música] Garota de Ipanema - Tom Jobim (4:15, MPB)
+## 🧑‍💻 Exemplo de Uso
 
-------------------------------------------------------------------------
+```java
+Catalogo catalogo = new Catalogo();
 
-## 🚀 Como Executar
+Midia m1 = new Midia("Imagine", "John Lennon", 180, Genero.ROCK, "musica");
+Midia m2 = new Midia("Águas de Março", "Tom Jobim", 200, Genero.MPB, "musica");
 
-1.  Clone este repositório:
+catalogo.adicionarMidia(m1);
+catalogo.adicionarMidia(m2);
 
-    ``` bash
-    git clone (https://github.com/gabriel-freitas96/OrientadaObjetos1-FASE.git)
-    ```
+Usuario user = new Usuario("Ana", "ana@email.com");
+user.criarPlaylist("Favoritas");
 
-2.  Entre no diretório do projeto:
+Playlist favoritas = user.getPlaylist("Favoritas");
+favoritas.adicionarMusica("Imagine");
+favoritas.adicionarMusica("Águas de Março");
 
-    ``` bash
-    cd projeto-playlist-java/src
-    ```
+favoritas.visualizarPlaylist(catalogo);
 
-3.  Compile e rode a aplicação:
+🛠️ Tecnologias Utilizadas
 
-    ``` bash
-    javac App.java
-    java App
-    ```
+Java 8+ (ou superior)
 
-------------------------------------------------------------------------
+Paradigma de Programação Orientado a Objetos (POO)
 
-## 🛠️ Tecnologias Utilizadas
+📚 Possíveis Expansões
 
--   ☕ **Java 17+**
--   🗂️ **Programação Orientada a Objetos (POO)**
--   📝 **Enumerações e Coleções (List, ArrayList, Stream API)**
+Suporte a múltiplos tipos de mídia com comportamento específico.
 
-------------------------------------------------------------------------
+Integração com banco de dados para persistência.
 
-## 📌 Possíveis Melhorias Futuras
+Interface gráfica com JavaFX ou Swing.
 
--   [ ] Tornar o programa **interativo via console** (menu para o
-    usuário escolher opções).\
--   [ ] Persistência de dados em arquivo ou banco de dados (SQLite).\
--   [ ] API REST com **Spring Boot**.\
--   [ ] Interface gráfica (Swing/JavaFX).
+Exportação/importação de playlists.
 
-------------------------------------------------------------------------
+Sistema de autenticação e login.
 
-## 👨‍💻 Autor
+📄 Licença
 
-Desenvolvido com 💙 por **\[Gabriel Lacerda,Samires do Carmo,Henry Galdino,Miguel Viana\]**\
+Este projeto é de código aberto e pode ser usado livremente para fins educacionais.
 
+🤝 Contribuição
+
+Gabriel Lacerda
+Miguel Viana
+Samires Carmo
+Henry Galdino
