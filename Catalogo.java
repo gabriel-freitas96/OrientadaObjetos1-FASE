@@ -4,19 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Catalogo {
-	private List<Midia>midias=new ArrayList<>();
+	private ArrayList<Midia> midias;
 	
-	public void adicionarMusica(Midia midia) {
+	public Catalogo() {
+		this.midias = new ArrayList<>();
+	}
+	
+	public void adicionarMidia(Midia midia) {
 		midias.add(midia);
 	}
-	public List<Midia>buscarPorTitulo(String Titulo){
-		List<Midia>resultado=new ArrayList<>();
-		for(Midia m:midias) {
-			if(m.getTitulo().equalsIgnoreCase(Titulo)){
-				resultado.add(m);
-			}
-		}
-		return resultado;
+	public Midia buscarPorTitulo(String titulo) {
+	    for (Midia musicas : midias) {
+	    	 if (musicas.getTitulo().equalsIgnoreCase(titulo)) { 
+	            return musicas;
+	        }
+	    }
+	    return null;
 	}
 	public List<Midia>buscarPorArtista(String Titulo){
 		List<Midia>resultado=new ArrayList<>();
@@ -36,7 +39,7 @@ public class Catalogo {
 		}
 		return resultado;
 	}
-	public List<Midia>getTodasAsMidias(){
+	public ArrayList<Midia> getMidias() {
 		return midias;
 	}
 	
