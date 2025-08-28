@@ -1,9 +1,4 @@
 package Usuario;
-
-import Usuario.Catalogo;
-
-
-
 public class Main {
 
     public static void main(String[] args) {
@@ -28,3 +23,4 @@ public class Main {
         System.out.println("Duração total: " + favoritas.calcularDuracaoTotal(catalogo) + " segundos");
     }
 }
+
