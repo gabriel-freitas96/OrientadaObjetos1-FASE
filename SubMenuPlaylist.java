@@ -1,74 +1,62 @@
-import excecoes.MusicaNaoEncontrada;
-import excecoes.PlaylistNaoEncontrada;
+package Usuario;
 
 import java.util.Scanner;
+import excecoes.*;
 
 public class SubMenuPlaylist {
 
     public void exibirSubMenuPlaylist(Scanner sc, Sistema sistema) {
 
-        int opcao = -1;
+        int opcaoMenu = -1;
 
-        while (opcao != 6) {
+        while (opcaoMenu != 6) {
 
-            System.out.println("SubMenu playlist: ");
-            System.out.println("Digite (1) para adicionar música a uma playlist.");
-            System.out.println("Digite (2) para remover música de uma playlist.");
-            System.out.println("Digite (3) para deletar uma playlist.");
-            System.out.println("Digite (4) para atualizar nome de uma playlist.");
-            System.out.println("Digite (5) para ver a duração total de uma playlist.");
-            System.out.println("Digite (6) para voltar ao menu principal.");
+            System.out.println("\nSubMenu playlist:");
+            System.out.println("1 - Adicionar música a uma playlist");
+            System.out.println("2 - Remover música de uma playlist");
+            System.out.println("3 - Deletar uma playlist");
+            System.out.println("4 - Atualizar nome de uma playlist");
+            System.out.println("5 - Ver duração total de uma playlist");
+            System.out.println("6 - Voltar ao menu principal");
             System.out.print("Escolha uma opção: ");
-            int opcaoMenu = sc.nextInt();
-            sc.nextLine();
 
-            switch (opcaoMenu) {
+            try {
+                opcaoMenu = Integer.parseInt(sc.nextLine());
 
-                case 1: {
-                    try {
-                        sistema.adicionarMusicaAPlaylist(sc);
-                    } catch (PlaylistNaoEncontrada e) {
-                        System.out.println("Erro: " + e.getMessage());
+                switch (opcaoMenu) {
+                    case 1 -> {
+                        try {
+                            sistema.adicionarMusicaAPlaylist(sc);
+                        } catch (PlaylistNaoEncontrada e) {
+                            System.out.println("Erro: " + e.getMessage());
+                        }
                     }
-                    break;
-                }
 
-                case 2: {
-                    try{
-                        sistema.removerMusicaPlaylist(sc);
-                    } catch (PlaylistNaoEncontrada e) {
-                    System.out.println("Erro: " + e.getMessage());
-                } catch (MusicaNaoEncontrada e) {
-                    System.out.println("Erro: " + e.getMessage());
-                }
+                    case 2 -> {
+                        try {
+                            sistema.removerMusicaPlaylist(sc);
+                        } catch (PlaylistNaoEncontrada | MusicaNaoEncontrada e) {
+                            System.out.println("Erro: " + e.getMessage());
+                        }
+                    }
 
-                    break;
-                }
+                    case 3 -> {
+                        boolean sucesso = sistema.deletarPlaylist(sc);
+                        if (!sucesso) {
+                            System.out.println("Erro: Playlist não encontrada para deletar.");
+                        }
+                    }
 
-                case 3: {
-                    sistema.deletarPlaylist(sc);
-                    break;
-                }
+                    case 4 -> sistema.atualizarNomePlaylist(sc);
 
-                case 4: {
-                    sistema.atualizarNomePlaylist(sc);
-                    break;
-                }
+                    case 5 -> sistema.mostrarDuracaoTotalPlaylist(sc);
 
-                case 5: {
-                    sistema.mostrarDuracaoTotalPlaylist(sc);
-                    break;
-                }
+                    case 6 -> System.out.println("Voltando para o menu principal...");
 
-                case 6: {
-                    System.out.println("Voltando para o menu principal...");
-                    break;
+                    default -> System.out.println("Opção inválida!");
                 }
-
-                default: {
-                    System.out.println("Opção inválida!");
-                    break;
-                }
+            } catch (NumberFormatException e) {
+                System.out.println("Por favor, digite um número válido!");
             }
         }
     }
