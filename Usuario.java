@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package Usuario;
+
 import java.util.Objects;
 
 public class Usuario {
@@ -54,4 +55,6 @@ public class Usuario {
 		return "Usuario [nome=" + nome + ", email=" + email + "]";
 	}
 }
+
+
 
