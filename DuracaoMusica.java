@@ -5,3 +5,4 @@ public class DuracaoMusica extends Exception {
         super(mensagem);
     }
 }
+
