@@ -1,7 +1,6 @@
-package www.br.com.unifacisa;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+import excecoes.*;
 
 public class Sistema {
     private ArrayList<Playlist> playlists = new ArrayList<>();
@@ -22,30 +21,42 @@ public class Sistema {
         this.playlists = playlists;
     }
 
-    public void criarPlaylist(Scanner sc) {
-        System.out.println("Para criar uma playlist, é necessário criar um cadastro.");
+    public void criarPlaylist(Scanner sc) throws EmailInvalido, UsuarioSemNome, PlaylistSemNome, PlaylistExistente {
         System.out.print("Digite seu nome: ");
         String nome = sc.nextLine();
+        if (nome.trim().isEmpty()) {
+            throw new UsuarioSemNome("Nome do usuário não pode ser vazio!");
+        }
+
         System.out.print("Digite seu email: ");
         String email = sc.nextLine();
-        System.out.println("Cadastro concluído com sucesso!");
+        if (!email.contains("@")) {
+            throw new EmailInvalido("E-mail inválido!");
+        }
 
         Usuario usuario = new Usuario(nome, email);
 
         System.out.print("Agora crie um nome para a playlist: ");
         String nomePlaylist = sc.nextLine();
+        if (nomePlaylist.trim().isEmpty()) {
+            throw new PlaylistSemNome("Nome da playlist não pode ser vazio!");
+        }
+
+        if (buscarPlaylistPeloNome(nomePlaylist) != null) {
+            throw new PlaylistExistente("Já existe uma playlist com esse nome!");
+        }
 
         Playlist playlist = new Playlist(nomePlaylist, usuario);
-        System.out.println("Playlist criada com sucesso e pronta para adicionar músicas!");
-
         adicionarPlaylist(playlist);
+        System.out.println("Playlist criada com sucesso e pronta para adicionar músicas!");
     }
 
     public void adicionarPlaylist(Playlist playlist) {
         playlists.add(playlist);
     }
 
-    public void adicionarMidia(Scanner sc) {
+
+    public void adicionarMidia(Scanner sc) throws DuracaoMusica, TipoDeMidiaInvalido, GeneroMusicalInvalido {
         System.out.print("Digite o título da mídia: ");
         String titulo = sc.nextLine();
         System.out.print("Digite o nome do(a) artista da mídia: ");
@@ -53,6 +64,9 @@ public class Sistema {
         System.out.print("Qual a duração da mídia: ");
         double duracao = sc.nextDouble();
         sc.nextLine();
+        if (duracao <= 0) {
+            throw new DuracaoMusica("A duração da mídia deve ser maior que 0!");
+        }
 
         System.out.print("Qual é o tipo de mídia que vai adicionar à playlist? (1 - Música, 2 - Podcast, 3 - Audiobook): ");
         int opcaoMidia = sc.nextInt();
@@ -65,11 +79,11 @@ public class Sistema {
         } else if (opcaoMidia == 3) {
             adicionarAudiobookMidia(sc, titulo, artista, duracao);
         } else {
-            System.out.println("Tipo de mídia inválida.");
+            throw new TipoDeMidiaInvalido("Tipo de Mídia inválido!");
         }
     }
 
-    public void adicionarMusicaMidia(Scanner sc, String titulo, String artista, double duracao) {
+    public void adicionarMusicaMidia(Scanner sc, String titulo, String artista, double duracao) throws GeneroMusicalInvalido {
         System.out.print("Digite o gênero musical (Clássica, Pop, Rock, Rap ou Mpb): ");
         String genero = sc.nextLine();
 
@@ -86,7 +100,7 @@ public class Sistema {
         } else if (genero.equalsIgnoreCase("Rap")) {
             musica.setGenero(GeneroMusical.RAP);
         } else {
-            System.out.println("Gênero musical inválido.");
+            throw new GeneroMusicalInvalido("Gênero musical inválido!");
         }
 
         catalogo.adicionarMidia(musica);
@@ -105,7 +119,7 @@ public class Sistema {
         System.out.println("Mídia adicionada com sucesso!");
     }
 
-    public void adicionarMusicaAPlaylist(Scanner sc) {
+    public void adicionarMusicaAPlaylist(Scanner sc) throws PlaylistNaoEncontrada {
         System.out.print("Digite o título da música que deseja adicionar na playlist: ");
         String tituloMusica = sc.nextLine();
 
@@ -115,7 +129,7 @@ public class Sistema {
         Playlist playlist = buscarPlaylistPeloNome(nomePlaylist);
 
         if (playlist == null) {
-            System.out.println("Playlist não encontrada!");
+            throw new PlaylistNaoEncontrada("Playlist não encontrada!");
         } else {
             Musica musica = null;
             for (Midia midia : catalogo.getMidias()) {
@@ -144,7 +158,7 @@ public class Sistema {
         return null;
     }
     
-    public void removerMusicaPlaylist(Scanner sc) {
+    public void removerMusicaPlaylist(Scanner sc) throws MusicaNaoEncontrada, PlaylistNaoEncontrada {
         System.out.print("Digite o nome da música para remover: ");
         String nomeMusica = sc.nextLine();
 
@@ -154,16 +168,16 @@ public class Sistema {
         Playlist playlist = buscarPlaylistPeloNome(nomePlaylist);
 
         if (playlist == null) {
-            System.out.println("Playlist não encontrada!");
+            throw new MusicaNaoEncontrada("Música não encontrada na playlist!");
         } else {
             removerMusica(nomeMusica, playlist);
         }
     }
 
 
-    public boolean removerMusica(String nomeMusica, Playlist playlist) {
+    public boolean removerMusica(String nomeMusica, Playlist playlist) throws PlaylistNaoEncontrada, MusicaNaoEncontrada {
         if (playlist == null) {
-            System.out.println("Playlist não encontrada!");
+            throw new PlaylistNaoEncontrada("Playlist não encontrada!");
             return false;
         }
 
@@ -177,7 +191,7 @@ public class Sistema {
             }
         }
 
-        System.out.println("Música não encontrada na playlist!");
+        throw new MusicaNaoEncontrada("Musica não encontrada!");
         return false;
     }
 

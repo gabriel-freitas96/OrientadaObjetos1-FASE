@@ -1,8 +1,5 @@
-package www.br.com.unifacisa;
-        
 import java.util.ArrayList;
 import java.util.Objects;
-
 
 public class Playlist {
     private String nome;

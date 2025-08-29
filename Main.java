@@ -1,4 +1,4 @@
-package www.br.com.unifacisa;
+import excecoes.*;
 
 import java.util.Scanner;
 
@@ -22,11 +22,31 @@ public class Main {
 
             switch (opcao) {
                 case 1: {
-                    sistema.criarPlaylist(sc);
+                    try {
+                        sistema.criarPlaylist(sc);
+                    } catch (PlaylistExistente e) {
+                        System.out.println("Erro: " + e.getMessage());
+                    }catch (PlaylistSemNome e) {
+                        System.out.println("Erro: " + e.getMessage());
+                    }catch (UsuarioSemNome e) {
+                        System.out.println("Erro: " + e.getMessage());
+                    } catch (EmailInvalido e) {
+                        System.out.println("Erro: " + e.getMessage());
+                    }
+
                     break;
                 }
                 case 2: {
-                    sistema.adicionarMidia(sc);
+                    try {
+                        sistema.adicionarMidia(sc);
+                    }catch (DuracaoMusica e) {
+                        System.out.println("Erro: " + e.getMessage());
+                    }catch (TipoDeMidiaInvalido e) {
+                        System.out.println("Erro: " + e.getMessage());
+                    }catch (GeneroMusicalInvalido e) {
+                        System.out.println("Erro: " + e.getMessage());
+                    }
+
                     break;
                 }
                 case 3: {
@@ -34,7 +54,7 @@ public class Main {
                    break;
                 }
                 case 4: {
-                	submenu.exibirSubMenuPlaylist(sc, sistema);
+                        submenu.exibirSubMenuPlaylist(sc, sistema);
                 	break;
                 }
                 case 5: {

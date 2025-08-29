@@ -1,5 +1,3 @@
-package www.br.com.unifacisa;
-
 import java.util.ArrayList;
 import java.util.Objects;
 

@@ -1,4 +1,5 @@
-package www.br.com.unifacisa;
+import excecoes.MusicaNaoEncontrada;
+import excecoes.PlaylistNaoEncontrada;
 
 import java.util.Scanner;
 
@@ -24,12 +25,23 @@ public class SubMenuPlaylist {
             switch (opcaoMenu) {
 
                 case 1: {
-                    sistema.adicionarMusicaAPlaylist(sc);
+                    try {
+                        sistema.adicionarMusicaAPlaylist(sc);
+                    } catch (PlaylistNaoEncontrada e) {
+                        System.out.println("Erro: " + e.getMessage());
+                    }
                     break;
                 }
 
                 case 2: {
-                    sistema.removerMusicaPlaylist(sc);
+                    try{
+                        sistema.removerMusicaPlaylist(sc);
+                    } catch (PlaylistNaoEncontrada e) {
+                    System.out.println("Erro: " + e.getMessage());
+                } catch (MusicaNaoEncontrada e) {
+                    System.out.println("Erro: " + e.getMessage());
+                }
+
                     break;
                 }
 

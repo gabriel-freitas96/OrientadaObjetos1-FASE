@@ -1,5 +1,3 @@
-package www.br.com.unifacisa;
-
 public class Musica extends Midia{
 	private GeneroMusical genero;
 	

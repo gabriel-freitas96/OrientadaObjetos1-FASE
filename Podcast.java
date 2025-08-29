@@ -1,5 +1,3 @@
-package www.br.com.unifacisa;
-
 public class Podcast extends Midia {
 
 	public Podcast(String titulo, String artista, double duracao) {
