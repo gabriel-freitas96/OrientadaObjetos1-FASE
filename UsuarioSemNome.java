@@ -5,3 +5,5 @@ public class UsuarioSemNome extends Exception {
         super(mensagem);
     }
 }
+
+
