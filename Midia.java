@@ -1,20 +1,24 @@
-package Usuario;
+package www.br.com.unifacisa;
+
+import java.util.Objects;
 
 public class Midia {
 	protected String titulo;
 	protected String artista;
-	protected int duracaoSegudos;
-	protected Genero genero;
-	private String tipo;
+	protected double duracao;
 	
-	public  Midia(String titulo,String artista,int duracaoSegudos,Genero genero,String tipo) {
-		this.titulo=titulo;
-		this.artista=artista;
-		this.duracaoSegudos=duracaoSegudos;
-		this.genero=genero;
-		this.tipo = tipo;
+	
+	public Midia(String titulo, String artista, double duracao) {
+		super();
+		this.titulo = titulo;
+		this.artista = artista;
+		this.duracao = duracao;
 	}
-
+	
+	public Midia() {
+		
+	}
+	
 	public String getTitulo() {
 		return titulo;
 	}
@@ -31,40 +35,36 @@ public class Midia {
 		this.artista = artista;
 	}
 
-	public int getDuracaoSegudos() {
-		return duracaoSegudos;
+	public double getDuracao() {
+		return duracao;
 	}
 
-	public void setDuracaoSegudos(int duracaoSegudos) {
-		this.duracaoSegudos = duracaoSegudos;
+	public void setDuracao(double duracao) {
+		this.duracao = duracao;
 	}
 
-	public Genero getGenero() {
-		return genero;
+	@Override
+	public int hashCode() {
+		return Objects.hash(artista, duracao, titulo);
 	}
 
-	public void setGenero(Genero genero) {
-		this.genero = genero;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Midia other = (Midia) obj;
+		return Objects.equals(artista, other.artista)
+				&& Double.doubleToLongBits(duracao) == Double.doubleToLongBits(other.duracao)
+				&& Objects.equals(titulo, other.titulo);
 	}
 
 	@Override
 	public String toString() {
-		return "Midia [titulo=" + titulo + ", artista=" + artista + ", duracaoSegudos=" + duracaoSegudos + ", genero="
-				+ genero + ", tipo=" + tipo + "]";
+		return "Midia [titulo=" + titulo + ", artista=" + artista + ", duracao=" + duracao + "]";
 	}
+
 }
-
-
-
-
-	
-
-
