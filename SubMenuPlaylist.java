@@ -7,9 +7,9 @@ public class SubMenuPlaylist {
 
     public void exibirSubMenuPlaylist(Scanner sc, Sistema sistema) {
 
-        int opcao = -1;
+        int opcaoMenu = -1;
 
-        while (opcao != 6) {
+        while (opcaoMenu != 6) {
 
             System.out.println("SubMenu playlist: ");
             System.out.println("Digite (1) para adicionar música a uma playlist.");
@@ -19,56 +19,17 @@ public class SubMenuPlaylist {
             System.out.println("Digite (5) para ver a duração total de uma playlist.");
             System.out.println("Digite (6) para voltar ao menu principal.");
             System.out.print("Escolha uma opção: ");
-            int opcaoMenu = sc.nextInt();
+            opcaoMenu = sc.nextInt();
             sc.nextLine();
 
             switch (opcaoMenu) {
-
-                case 1: {
-                    try {
-                        sistema.adicionarMusicaAPlaylist(sc);
-                    } catch (PlaylistNaoEncontrada e) {
-                        System.out.println("Erro: " + e.getMessage());
-                    }
-                    break;
-                }
-
-                case 2: {
-                    try{
-                        sistema.removerMusicaPlaylist(sc);
-                    } catch (PlaylistNaoEncontrada e) {
-                    System.out.println("Erro: " + e.getMessage());
-                } catch (MusicaNaoEncontrada e) {
-                    System.out.println("Erro: " + e.getMessage());
-                }
-
-                    break;
-                }
-
-                case 3: {
-                    sistema.deletarPlaylist(sc);
-                    break;
-                }
-
-                case 4: {
-                    sistema.atualizarNomePlaylist(sc);
-                    break;
-                }
-
-                case 5: {
-                    sistema.mostrarDuracaoTotalPlaylist(sc);
-                    break;
-                }
-
-                case 6: {
-                    System.out.println("Voltando para o menu principal...");
-                    break;
-                }
-
-                default: {
-                    System.out.println("Opção inválida!");
-                    break;
-                }
+                case 1 -> sistema.adicionarMusicaAPlaylist(sc);
+                case 2 -> sistema.removerMusicaPlaylist(sc);
+                case 3 -> sistema.deletarPlaylist(sc);
+                case 4 -> sistema.atualizarNomePlaylist(sc);
+                case 5 -> sistema.mostrarDuracaoTotalPlaylist(sc);
+                case 6 -> System.out.println("Voltando para o menu principal...");
+                default -> System.out.println("Opção inválida!");
             }
         }
     }
