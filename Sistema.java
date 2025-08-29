@@ -1,16 +1,19 @@
+package Usuario;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import excecoes.*;
 
 public class Sistema {
     private ArrayList<Playlist> playlists = new ArrayList<>();
     private Catalogo catalogo = new Catalogo();
 
-    public Sistema(ArrayList<Playlist> playlists) {
-        this.playlists = playlists;
+    public Sistema() {
     }
 
-    public Sistema() {
+    public Sistema(ArrayList<Playlist> playlists) {
+        this.playlists = playlists;
     }
 
     public ArrayList<Playlist> getPlaylists() {
@@ -21,7 +24,7 @@ public class Sistema {
         this.playlists = playlists;
     }
 
-    public void criarPlaylist(Scanner sc) throws EmailInvalido, UsuarioSemNome, PlaylistSemNome, PlaylistExistente {
+    public void criarPlaylist(Scanner sc) throws UsuarioSemNome, EmailInvalido, PlaylistSemNome, PlaylistExistente {
         System.out.print("Digite seu nome: ");
         String nome = sc.nextLine();
         if (nome.trim().isEmpty()) {
@@ -34,27 +37,21 @@ public class Sistema {
             throw new EmailInvalido("E-mail inválido!");
         }
 
-        Usuario usuario = new Usuario(nome, email);
-
         System.out.print("Agora crie um nome para a playlist: ");
         String nomePlaylist = sc.nextLine();
         if (nomePlaylist.trim().isEmpty()) {
             throw new PlaylistSemNome("Nome da playlist não pode ser vazio!");
         }
 
-        if (buscarPlaylistPeloNome(nomePlaylist) != null) {
-            throw new PlaylistExistente("Já existe uma playlist com esse nome!");
-        }
-
-        Playlist playlist = new Playlist(nomePlaylist, usuario);
-        adicionarPlaylist(playlist);
-        System.out.println("Playlist criada com sucesso e pronta para adicionar músicas!");
+        System.out.println("Playlist criada com sucesso!");
     }
 
     public void adicionarPlaylist(Playlist playlist) {
         playlists.add(playlist);
     }
-
+    public Catalogo getCatalogo() {
+        return catalogo;
+    }
 
     public void adicionarMidia(Scanner sc) throws DuracaoMusica, TipoDeMidiaInvalido, GeneroMusicalInvalido {
         System.out.print("Digite o título da mídia: ");
@@ -64,6 +61,7 @@ public class Sistema {
         System.out.print("Qual a duração da mídia: ");
         double duracao = sc.nextDouble();
         sc.nextLine();
+
         if (duracao <= 0) {
             throw new DuracaoMusica("A duração da mídia deve ser maior que 0!");
         }
@@ -72,82 +70,70 @@ public class Sistema {
         int opcaoMidia = sc.nextInt();
         sc.nextLine();
 
-        if (opcaoMidia == 1) {
-            adicionarMusicaMidia(sc, titulo, artista, duracao);
-        } else if (opcaoMidia == 2) {
-            adicionarPodcastMidia(sc, titulo, artista, duracao);
-        } else if (opcaoMidia == 3) {
-            adicionarAudiobookMidia(sc, titulo, artista, duracao);
-        } else {
-            throw new TipoDeMidiaInvalido("Tipo de Mídia inválido!");
+        switch (opcaoMidia) {
+            case 1 -> adicionarMusicaMidia(sc, titulo, artista, duracao);
+            case 2 -> adicionarPodcastMidia(titulo, artista, duracao);
+            case 3 -> adicionarAudiobookMidia(titulo, artista, duracao);
+            default -> throw new TipoDeMidiaInvalido("Tipo de Mídia inválido!");
         }
     }
 
     public void adicionarMusicaMidia(Scanner sc, String titulo, String artista, double duracao) throws GeneroMusicalInvalido {
         System.out.print("Digite o gênero musical (Clássica, Pop, Rock, Rap ou Mpb): ");
         String genero = sc.nextLine();
-
         Musica musica = new Musica(titulo, artista, duracao);
 
-        if (genero.equalsIgnoreCase("Clássica")) {
-            musica.setGenero(GeneroMusical.CLASSICA);
-        } else if (genero.equalsIgnoreCase("Pop")) {
-            musica.setGenero(GeneroMusical.POP);
-        } else if (genero.equalsIgnoreCase("Rock")) {
-            musica.setGenero(GeneroMusical.ROCK);
-        } else if (genero.equalsIgnoreCase("Mpb")) {
-            musica.setGenero(GeneroMusical.MPB);
-        } else if (genero.equalsIgnoreCase("Rap")) {
-            musica.setGenero(GeneroMusical.RAP);
-        } else {
-            throw new GeneroMusicalInvalido("Gênero musical inválido!");
+        switch (genero.toLowerCase()) {
+            case "clássica" -> musica.setGenero(GeneroMusical.CLASSICA);
+            case "pop" -> musica.setGenero(GeneroMusical.POP);
+            case "rock" -> musica.setGenero(GeneroMusical.ROCK);
+            case "rap" -> musica.setGenero(GeneroMusical.RAP);
+            case "mpb" -> musica.setGenero(GeneroMusical.MPB);
+            default -> throw new GeneroMusicalInvalido("Gênero musical inválido!");
         }
 
         catalogo.adicionarMidia(musica);
-        System.out.println("Mídia adicionada com sucesso!");
+        System.out.println("Música adicionada com sucesso!");
     }
 
-    public void adicionarPodcastMidia(Scanner sc, String titulo, String artista, double duracao) {
+    public void adicionarPodcastMidia(String titulo, String artista, double duracao) {
         Podcast podcast = new Podcast(titulo, artista, duracao);
         catalogo.adicionarMidia(podcast);
-        System.out.println("Mídia adicionada com sucesso!");
+        System.out.println("Podcast adicionado com sucesso!");
     }
 
-    public void adicionarAudiobookMidia(Scanner sc, String titulo, String artista, double duracao) {
+    public void adicionarAudiobookMidia(String titulo, String artista, double duracao) {
         Audiobook audiobook = new Audiobook(titulo, artista, duracao);
         catalogo.adicionarMidia(audiobook);
-        System.out.println("Mídia adicionada com sucesso!");
+        System.out.println("Audiobook adicionado com sucesso!");
     }
 
     public void adicionarMusicaAPlaylist(Scanner sc) throws PlaylistNaoEncontrada {
         System.out.print("Digite o título da música que deseja adicionar na playlist: ");
         String tituloMusica = sc.nextLine();
-
         System.out.print("Digite o nome da playlist que deseja adicionar a música: ");
         String nomePlaylist = sc.nextLine();
 
         Playlist playlist = buscarPlaylistPeloNome(nomePlaylist);
-
         if (playlist == null) {
             throw new PlaylistNaoEncontrada("Playlist não encontrada!");
-        } else {
-            Musica musica = null;
-            for (Midia midia : catalogo.getMidias()) {
-                if (midia instanceof Musica && midia.getTitulo().equalsIgnoreCase(tituloMusica)) {
-                    musica = (Musica) midia;
-                    break;
-                }
-            }
+        }
 
-            if (musica == null) {
-                System.out.println("Música não encontrada!");
-            } else {
-                playlist.getMusicas().add(musica);
-                System.out.println("Música adicionada com sucesso na playlist!");
+        Musica musica = null;
+        for (Midia midia : catalogo.getMidias()) {
+            if (midia instanceof Musica && midia.getTitulo().equalsIgnoreCase(tituloMusica)) {
+                musica = (Musica) midia;
+                break;
             }
         }
-    }
 
+        if (musica == null) {
+            System.out.println("Música não encontrada!");
+        } else {
+            playlist.getMusicas().add(musica);
+            System.out.println("Música adicionada com sucesso na playlist!");
+        }
+    }
 
     public Playlist buscarPlaylistPeloNome(String nomePlaylist) {
         for (Playlist playlist : playlists) {
@@ -157,32 +143,23 @@ public class Sistema {
         }
         return null;
     }
-    
-    public void removerMusicaPlaylist(Scanner sc) throws MusicaNaoEncontrada, PlaylistNaoEncontrada {
+
+    public void removerMusicaPlaylist(Scanner sc) throws PlaylistNaoEncontrada, MusicaNaoEncontrada {
         System.out.print("Digite o nome da música para remover: ");
         String nomeMusica = sc.nextLine();
-
         System.out.print("Digite o nome da playlist: ");
         String nomePlaylist = sc.nextLine();
 
         Playlist playlist = buscarPlaylistPeloNome(nomePlaylist);
-
-        if (playlist == null) {
-            throw new MusicaNaoEncontrada("Música não encontrada na playlist!");
-        } else {
-            removerMusica(nomeMusica, playlist);
-        }
-    }
-
-
-    public boolean removerMusica(String nomeMusica, Playlist playlist) throws PlaylistNaoEncontrada, MusicaNaoEncontrada {
         if (playlist == null) {
             throw new PlaylistNaoEncontrada("Playlist não encontrada!");
-            return false;
         }
 
-        ArrayList<Musica> musicas = playlist.getMusicas();
+        removerMusica(nomeMusica, playlist);
+    }
 
+    public boolean removerMusica(String nomeMusica, Playlist playlist) throws MusicaNaoEncontrada {
+        ArrayList<Musica> musicas = playlist.getMusicas();
         for (int i = 0; i < musicas.size(); i++) {
             if (musicas.get(i).getTitulo().equalsIgnoreCase(nomeMusica.trim())) {
                 musicas.remove(i);
@@ -190,9 +167,7 @@ public class Sistema {
                 return true;
             }
         }
-
-        throw new MusicaNaoEncontrada("Musica não encontrada!");
-        return false;
+        throw new MusicaNaoEncontrada("Música não encontrada!");
     }
 
     public void atualizarNomePlaylist(Scanner sc) {
@@ -200,16 +175,22 @@ public class Sistema {
         String emailUsuario = sc.nextLine();
         System.out.print("Digite o nome da playlist que deseja alterar: ");
         String nomeAntigoP = sc.nextLine();
-        System.out.print("Digite o novo nome que deseja dar a playlist: ");
+        System.out.print("Digite o novo nome que deseja dar à playlist: ");
         String novoNomeP = sc.nextLine();
 
+        boolean alterado = false;
+
         for (Playlist playlist : playlists) {
-            if (playlist.getNome().equalsIgnoreCase(nomeAntigoP) && playlist.getUsuario().getEmail().equals(emailUsuario)) {
+            if (playlist.getNome().equalsIgnoreCase(nomeAntigoP) && playlist.getUsuario().getEmail().equalsIgnoreCase(emailUsuario)) {
                 playlist.setNome(novoNomeP);
                 System.out.println("Nome da playlist foi atualizado com sucesso!");
-            } else {
-                System.out.println("Nenhuma playlist foi encontrada para esse Usuário!");
+                alterado = true;
+                break;
             }
+        }
+
+        if (!alterado) {
+            System.out.println("Nenhuma playlist foi encontrada para esse usuário!");
         }
     }
 
@@ -224,9 +205,11 @@ public class Sistema {
                 return true;
             }
         }
+
+        System.out.println("Playlist não encontrada.");
         return false;
     }
-    
+
     public void mostrarDuracaoTotalPlaylist(Scanner sc) {
         System.out.print("Digite o nome da playlist que deseja ver a duração: ");
         String nomePlaylist = sc.nextLine();
@@ -242,11 +225,7 @@ public class Sistema {
             total += musica.getDuracao();
         }
 
-        System.out.println("Duração total da playlist: " + total + " minutos");
-    
-    
-    
+        System.out.printf("Duração total da playlist: %.2f minutos%n", total);
     }
-    
- 
 }
+
