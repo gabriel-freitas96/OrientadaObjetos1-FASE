@@ -1,6 +1,7 @@
-import excecoes.*;
+package Usuario;
 
 import java.util.Scanner;
+import excecoes.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,70 +11,67 @@ public class Main {
         int opcao = -1;
 
         while (opcao != 5) {
-            System.out.println("-".repeat(10) + "Menu" + "-".repeat(10));
-            System.out.println("Digite (1) para criar uma playlist.");
-            System.out.println("Digite (2) para adicionar mídia ao catálogo.");
-            System.out.println("Digite (3) para visualizar uma mídia.");
-            System.out.println("Digite (4) ➡ Playlist ");
-            System.out.println("Digite (5) para sair.");
-            System.out.println("Escolha uma opção: ");
-            opcao = sc.nextInt();
-            sc.nextLine();
+            System.out.println("\n" + "-".repeat(10) + " MENU " + "-".repeat(10));
+            System.out.println("1 - Criar uma playlist");
+            System.out.println("2 - Adicionar mídia ao catálogo");
+            System.out.println("3 - Visualizar mídias do catálogo");
+            System.out.println("4 - Acessar submenu de playlists");
+            System.out.println("5 - Sair");
+            System.out.print("Escolha uma opção: ");
 
-            switch (opcao) {
-                case 1: {
-                    try {
-                        sistema.criarPlaylist(sc);
-                    } catch (PlaylistExistente e) {
-                        System.out.println("Erro: " + e.getMessage());
-                    }catch (PlaylistSemNome e) {
-                        System.out.println("Erro: " + e.getMessage());
-                    }catch (UsuarioSemNome e) {
-                        System.out.println("Erro: " + e.getMessage());
-                    } catch (EmailInvalido e) {
-                        System.out.println("Erro: " + e.getMessage());
+            try {
+                opcao = Integer.parseInt(sc.nextLine());
+
+                switch (opcao) {
+                    case 1 -> {
+                        try {
+                            sistema.criarPlaylist(sc);
+                        } catch (UsuarioSemNome e) {
+                            System.out.println("Erro: Nome do usuário é obrigatório.");
+                        } catch (EmailInvalido e) {
+                            System.out.println("Erro: Email inválido.");
+                        } catch (PlaylistSemNome e) {
+                            System.out.println("Erro: Nome da playlist não pode ser vazio.");
+                        } catch (PlaylistExistente e) {
+                            System.out.println("Erro: Já existe uma playlist com esse nome.");
+                        }
                     }
 
-                    break;
-                }
-                case 2: {
-                    try {
-                        sistema.adicionarMidia(sc);
-                    }catch (DuracaoMusica e) {
-                        System.out.println("Erro: " + e.getMessage());
-                    }catch (TipoDeMidiaInvalido e) {
-                        System.out.println("Erro: " + e.getMessage());
-                    }catch (GeneroMusicalInvalido e) {
-                        System.out.println("Erro: " + e.getMessage());
+                    case 2 -> {
+                        try {
+                            sistema.adicionarMidia(sc);
+                        } catch (DuracaoMusica e) {
+                            System.out.println("Erro: " + e.getMessage());
+                        } catch (TipoDeMidiaInvalido e) {
+                            System.out.println("Erro: " + e.getMessage());
+                        } catch (GeneroMusicalInvalido e) {
+                            System.out.println("Erro: " + e.getMessage());
+                        }
                     }
 
-                    break;
+                    case 3 -> {
+                        System.out.println("\nCatálogo de Mídias:");
+                        if (sistema.getCatalogo().getMidias().isEmpty()) {
+                            System.out.println("Nenhuma mídia no catálogo.");
+                        } else {
+                            for (Midia midia : sistema.getCatalogo().getMidias()) {
+                                System.out.println(midia);
+                            }
+                        }
+                    }
+
+                    case 4 -> submenu.exibirSubMenuPlaylist(sc, sistema);
+
+                    case 5 -> System.out.println("Saindo do sistema... Até logo!");
+
+                    default -> System.out.println("Opção inválida! Tente novamente.");
                 }
-                case 3: {
-                	//Ainda vou fazer o método
-                   break;
-                }
-                case 4: {
-                        submenu.exibirSubMenuPlaylist(sc, sistema);
-                	break;
-                }
-                case 5: {
-                    System.out.println("Saindo do sistema...");
-                    break;
-                }
-                default: {
-                    System.out.println("Opção inválida! Tente novamente.");
-                    break;
-                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("Por favor, digite apenas números para as opções do menu.");
             }
         }
 
-        sc.close(); 
+        sc.close();
     }
 }
-			
-			
-			
-		
-		
-
