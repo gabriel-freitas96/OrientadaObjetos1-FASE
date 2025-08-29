@@ -39,26 +39,6 @@ Este projeto é uma aplicação simples em Java que permite gerenciar usuários,
 
 ---
 
-## 🧑‍💻 Exemplo de Uso
-
-```java
-Catalogo catalogo = new Catalogo();
-
-Midia m1 = new Midia("Imagine", "John Lennon", 180, Genero.ROCK, "musica");
-Midia m2 = new Midia("Águas de Março", "Tom Jobim", 200, Genero.MPB, "musica");
-
-catalogo.adicionarMidia(m1);
-catalogo.adicionarMidia(m2);
-
-Usuario user = new Usuario("Ana", "ana@email.com");
-user.criarPlaylist("Favoritas");
-
-Playlist favoritas = user.getPlaylist("Favoritas");
-favoritas.adicionarMusica("Imagine");
-favoritas.adicionarMusica("Águas de Março");
-
-favoritas.visualizarPlaylist(catalogo);
-
 🛠️ Tecnologias Utilizadas
 
 Java 8+ (ou superior)
@@ -87,3 +67,4 @@ Gabriel Lacerda
 Miguel Viana
 Samires Carmo
 Henry Galdino
+
