@@ -5,3 +5,4 @@ public class EmailInvalido extends Exception {
         super(mensagem);
     }
 }
+
