@@ -1,3 +1,5 @@
+package Usuario;
+
 import java.util.Objects;
 
 public class Midia {
