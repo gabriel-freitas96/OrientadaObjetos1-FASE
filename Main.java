@@ -1,26 +1,59 @@
-package Usuario;
+package www.br.com.unifacisa;
+
+import java.util.Scanner;
+
 public class Main {
-
     public static void main(String[] args) {
-        Catalogo catalogo = new Catalogo();
+        Scanner sc = new Scanner(System.in);
+        Sistema sistema = new Sistema();
+        SubMenuPlaylist submenu = new SubMenuPlaylist();
+        int opcao = -1;
 
-        Midia m1 = new Musica("Imagine", "John Lennon", 180, Genero.ROCK);
-        Midia m2 = new Musica("Águas de Março", "Tom Jobim", 200, Genero.MPB);
+        while (opcao != 5) {
+            System.out.println("-".repeat(10) + "Menu" + "-".repeat(10));
+            System.out.println("Digite (1) para criar uma playlist.");
+            System.out.println("Digite (2) para adicionar mídia ao catálogo.");
+            System.out.println("Digite (3) para visualizar uma mídia.");
+            System.out.println("Digite (4) ➡ Playlist ");
+            System.out.println("Digite (5) para sair.");
+            System.out.println("Escolha uma opção: ");
+            opcao = sc.nextInt();
+            sc.nextLine();
 
-        catalogo.adicionarMidia(m1);
-        catalogo.adicionarMidia(m2);
+            switch (opcao) {
+                case 1: {
+                    sistema.criarPlaylist(sc);
+                    break;
+                }
+                case 2: {
+                    sistema.adicionarMidia(sc);
+                    break;
+                }
+                case 3: {
+                	//Ainda vou fazer o método
+                   break;
+                }
+                case 4: {
+                	submenu.exibirSubMenuPlaylist(sc, sistema);
+                	break;
+                }
+                case 5: {
+                    System.out.println("Saindo do sistema...");
+                    break;
+                }
+                default: {
+                    System.out.println("Opção inválida! Tente novamente.");
+                    break;
+                }
+            }
+        }
 
-        Usuario user = new Usuario("Ana", "ana@email.com");
-        user.criarPlaylist("Favoritas");
-
-        Playlist favoritas = user.getPlaylist("Favoritas");
-
-        favoritas.adicionarMusica(m1);
-        favoritas.adicionarMusica(m2);
-
-        favoritas.visualizarPlaylist(catalogo);
-
-        System.out.println("Duração total: " + favoritas.calcularDuracaoTotal(catalogo) + " segundos");
+        sc.close(); 
     }
 }
+			
+			
+			
+		
+		
 
