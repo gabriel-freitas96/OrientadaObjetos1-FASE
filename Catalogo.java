@@ -1,3 +1,4 @@
+package Usuario;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -49,12 +50,5 @@ public class Catalogo {
 
   public void adicionarMidia(Midia midia) {
 	  midias.add(midia);
-  }
-  
-  
-
-  
-	
-  
- 
+  } 
 }
