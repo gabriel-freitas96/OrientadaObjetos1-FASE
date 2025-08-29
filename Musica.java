@@ -1,7 +1,23 @@
-package Usuario;
+package www.br.com.unifacisa;
 
 public class Musica extends Midia{
-	public Musica(String titulo, String artista, int duracaoSegundos, Genero genero) {
-        super(titulo, artista, duracaoSegundos, genero, "musica");
-    }
+	private GeneroMusical genero;
+	
+	public Musica(String titulo, String artista, double duracao) {
+		super(titulo,artista,duracao);
+		this.genero = genero;
+		
+	}
+	
+	public Musica() {
+	}
+
+	public GeneroMusical getGenero() {
+		return genero;
+	}
+
+	public void setGenero(GeneroMusical genero) {
+		this.genero = genero;
+	}
+	
 }
