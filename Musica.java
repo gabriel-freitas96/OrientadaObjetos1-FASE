@@ -1,3 +1,5 @@
+package Usuario;
+
 public class Musica extends Midia{
 	private GeneroMusical genero;
 	
