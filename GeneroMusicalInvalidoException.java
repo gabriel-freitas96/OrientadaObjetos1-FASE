@@ -1,7 +1,7 @@
 package excecoes;
 
-public class GeneroMusicalInvalido extends Exception {
-    public GeneroMusicalInvalido(String message) {
+public class GeneroMusicalInvalidoException extends Exception {
+    public GeneroMusicalInvalidoException(String message) {
         super(message);
     }
 }
