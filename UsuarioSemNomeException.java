@@ -1,9 +1,10 @@
 package excecoes;
 
-public class UsuarioSemNome extends Exception {
-    public UsuarioSemNome(String mensagem) {
+public class UsuarioSemNomeException extends Exception {
+    public UsuarioSemNomeException(String mensagem) {
         super(mensagem);
     }
 }
+
 
 
