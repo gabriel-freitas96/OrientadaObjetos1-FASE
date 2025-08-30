@@ -1,0 +1,44 @@
+■ Convergências (iguais nos dois códigos)
+1 Ambos usam POO com herança: Midia (pai) + Musica, Podcast, Audiobook (filhos).
+2 Uso de enum para gêneros musicais (Genero vs GeneroMusical).
+3 Classe Usuário com nome e e-mail, dono de playlists.
+4 Classe Playlist com lista de mídias (não apenas músicas) e cálculo de duração.
+5 Uso de exceções customizadas.
+6 Há um menu interativo com Scanner.
+■■ Divergências (principais diferenças)
+1 1. Exceções
+2 - Meu código → poucas exceções, mais simples.
+3 - Seu código → várias exceções específicas (UsuarioSemNomeException,
+PlaylistExistenteException etc).
+4 - Conclusão: Seu código é mais realista e detalhado; o meu é mais didático.
+6 2. Catálogo
+7 - Meu código → catálogo “inteligente”, com busca por título/artista/gênero.
+8 - Seu código → catálogo mais simples, apenas armazena/adiciona mídias (a lógica fica no
+Sistema).
+9 - Diferença de design: No meu → responsabilidade descentralizada. No seu →
+responsabilidade centralizada no Sistema.
+11 3. Playlist
+12 - Ambos os códigos → playlists aceitam qualquer Midia (música, podcast, audiobook).
+13 - Conclusão: Ambos exploram polimorfismo de forma correta.
+15 4. Classe Sistema
+16 - Meu código → não existe um “controlador central”.
+17 - Seu código → tem um Sistema que orquestra tudo (criar playlist, adicionar/remover mídia,
+etc).
+18 - Conclusão: Seu design é mais próximo de MVC (controlador separado das entidades).
+20 5. Consistência das exceções
+21 - Meu código → todas terminam com Exception.
+22 - Seu código → algumas sim, outras não (PlaylistNaoEncontrada vs
+PlaylistNaoEncontradaException).
+23 - Conclusão: Melhor padronizar para clareza.
+25 6. Classe Musica
+26 - Meu código → construtor já exige Genero, garantindo consistência.
+27 - Seu código → cria música sem gênero e só depois seta.
+28 - Conclusão: No seu, fica mais flexível, mas pode gerar música “sem gênero”.
+■ Conclusão
+1 Seu código: mais completo para uso real, com controle central (Sistema), menus, submenus e
+exceções específicas.
+2 Meu código: mais didático, explora bem polimorfismo e deixa as entidades mais
+independentes.
+3 Melhor junção seria:
+4 - Manter seu Sistema e exceções detalhadas.
+5 - Usar meu catálogo com buscas avançadas.
