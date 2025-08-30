@@ -1,8 +1,7 @@
 package excecoes;
 
-public class PlaylistNaoEncontrada extends Exception {
-    public PlaylistNaoEncontrada(String mensagem) {
+public class PlaylistNaoEncontradaException extends Exception {
+    public PlaylistNaoEncontradaException(String mensagem) {
         super(mensagem);
     }
 }
-
