@@ -1,8 +1,9 @@
 package excecoes;
 
-public class EmailInvalido extends Exception {
-    public EmailInvalido(String mensagem) {
+public class EmailInvalidoException extends Exception {
+    public EmailInvalidoException(String mensagem) {
         super(mensagem);
     }
 }
+
 
