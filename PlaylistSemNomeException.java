@@ -1,7 +1,8 @@
 package excecoes;
 
-public class PlaylistSemNome extends Exception {
-    public PlaylistSemNome(String mensagem) {
+public class PlaylistSemNomeException extends Exception {
+    public PlaylistSemNomeException(String mensagem) {
         super(mensagem);
     }
 }
+
