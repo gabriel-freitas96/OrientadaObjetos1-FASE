@@ -1,6 +1,7 @@
 package excecoes;
-public class MusicaNaoEncontrada extends Exception {
-    public MusicaNaoEncontrada(String mensagem) {
+
+public class MusicaNaoEncontradaException extends Exception {
+    public MusicaNaoEncontradaException(String mensagem) {
         super(mensagem);
     }
 }
