@@ -1,7 +1,7 @@
 package excecoes;
 
-public class TipoDeMidiaInvalido extends Exception {
-    public TipoDeMidiaInvalido(String message) {
+public class TipoDeMidiaInvalidoException extends Exception {
+    public TipoDeMidiaInvalidoException(String message) {
         super(message);
     }
 }
