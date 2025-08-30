@@ -26,13 +26,13 @@ public class Main {
                     case 1 -> {
                         try {
                             sistema.criarPlaylist(sc);
-                        } catch (UsuarioSemNome e) {
+                        } catch (UsuarioSemNomeException e) {
                             System.out.println("Erro: Nome do usuário é obrigatório.");
-                        } catch (EmailInvalido e) {
+                        } catch (EmailInvalidoException e) {
                             System.out.println("Erro: Email inválido.");
-                        } catch (PlaylistSemNome e) {
+                        } catch (PlaylistSemNomeException e) {
                             System.out.println("Erro: Nome da playlist não pode ser vazio.");
-                        } catch (PlaylistExistente e) {
+                        } catch (PlaylistExistenteException e) {
                             System.out.println("Erro: Já existe uma playlist com esse nome.");
                         }
                     }
@@ -40,26 +40,17 @@ public class Main {
                     case 2 -> {
                         try {
                             sistema.adicionarMidia(sc);
-                        } catch (DuracaoMusica e) {
+                        } catch (DuracaoMusicaException e) {
                             System.out.println("Erro: " + e.getMessage());
-                        } catch (TipoDeMidiaInvalido e) {
+                        } catch (TipoDeMidiaInvalidoException e) {
                             System.out.println("Erro: " + e.getMessage());
-                        } catch (GeneroMusicalInvalido e) {
+                        } catch (GeneroMusicalInvalidoException e) {
                             System.out.println("Erro: " + e.getMessage());
                         }
                     }
 
-                    case 3 -> {
-                        System.out.println("\nCatálogo de Mídias:");
-                        if (sistema.getCatalogo().getMidias().isEmpty()) {
-                            System.out.println("Nenhuma mídia no catálogo.");
-                        } else {
-                            for (Midia midia : sistema.getCatalogo().getMidias()) {
-                                System.out.println(midia);
-                            }
-                        }
-                    }
-
+                    case 3 -> sistema.visualizarMidia(sc);
+                      
                     case 4 -> submenu.exibirSubMenuPlaylist(sc, sistema);
 
                     case 5 -> System.out.println("Saindo do sistema... Até logo!");
