@@ -63,8 +63,9 @@ Este projeto é de código aberto e pode ser usado livremente para fins educacio
 
 🤝 Contribuição
 
-Gabriel Lacerda
-Miguel Viana
-Samires Carmo
+Gabriel Lacerda,
+Miguel Viana,
+Samires Carmo,
 Henry Galdino
+
 
