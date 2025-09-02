@@ -5,7 +5,7 @@ public class Playlist {
     private String nome;
     private Usuario usuario;
     private ArrayList<Musica> musicas;
-    private int duracao;
+    private double duracao;
 
     public Playlist(String nome, Usuario usuario, int duracao) {
         this.nome = nome;
@@ -79,3 +79,4 @@ public class Playlist {
 
 	
 }
+
