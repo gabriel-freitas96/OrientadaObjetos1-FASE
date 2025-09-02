@@ -65,10 +65,11 @@ public class SubMenuPlaylist {
                     default -> System.out.println("Opção inválida!");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Por favor, digite um número válido!");
+                System.out.println("Por favor, digite um número válido!\n--------------------------\n");
             }
         }
     }
 }
+
 
 
