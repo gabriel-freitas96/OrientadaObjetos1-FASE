@@ -9,7 +9,7 @@ public class SubMenuPlaylist {
 
         int opcaoMenu = -1;
 
-        while (opcaoMenu != 6) {
+        while (opcaoMenu != 7) {
 
             System.out.println("\nSubMenu playlist:");
             System.out.println("1 - Adicionar música a uma playlist");
@@ -70,3 +70,4 @@ public class SubMenuPlaylist {
         }
     }
 }
+
