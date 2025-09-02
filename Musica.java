@@ -5,7 +5,6 @@ public class Musica extends Midia{
 	
 	public Musica(String titulo, String artista, double duracao) {
 		super(titulo,artista,duracao);
-		
 	}
 	public Musica() {
 	}
@@ -15,5 +14,9 @@ public class Musica extends Midia{
 	public void setGenero(GeneroMusical genero) {
 		this.genero = genero;
 	}
+	@Override
+public String toString() {
+    return "Musica [titulo=" + titulo + ", artista=" + artista + ", duracao=" + duracao + ", genero=" + genero + "]";
 }
+	}
 
