@@ -76,9 +76,4 @@ public class Playlist {
 		return "Playlist [nome=" + nome + ", usuario=" + usuario + ", musicas=" + musicas + ", duracaoTotal="
 				+ duracao + "]";
 	}
-
-    
-
-	
 }
-
