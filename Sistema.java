@@ -178,7 +178,7 @@ public class Sistema {
         throw new MusicaNaoEncontradaException("Música não encontrada!");
     }
 
-    public void atualizarNomePlaylist(Scanner sc) {
+   public void atualizarNomePlaylist(Scanner sc) {
         System.out.print("Digite o email para acessar as playlists: ");
         String emailUsuario = sc.nextLine();
         System.out.print("Digite o nome da playlist que deseja alterar: ");
@@ -191,6 +191,11 @@ public class Sistema {
         for (Playlist playlist : playlists) {
             if (playlist.getNome().equalsIgnoreCase(nomeAntigoP) && playlist.getUsuario().getEmail().equalsIgnoreCase(emailUsuario)) {
                 playlist.setNome(novoNomeP);
+                if (novoNomeP.trim().isEmpty()) {
+                    System.out.println("O novo nome não pode ser vazio!");
+                    return;
+                }
+                playlist.setNome(novoNomeP);
                 System.out.println("Nome da playlist foi atualizado com sucesso!");
                 alterado = true;
                 break;
@@ -201,7 +206,6 @@ public class Sistema {
             System.out.println("Nenhuma playlist foi encontrada para esse usuário!");
         }
     }
-
     public boolean deletarPlaylist(Scanner sc) {
         System.out.print("Digite o nome da playlist que deseja deletar: ");
         String nomeDeletarP = sc.nextLine();
@@ -330,4 +334,5 @@ public class Sistema {
         }
     }
 }
+
 
