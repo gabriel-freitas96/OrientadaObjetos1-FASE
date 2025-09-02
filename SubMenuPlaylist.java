@@ -11,7 +11,7 @@ public class SubMenuPlaylist {
 
         while (opcaoMenu != 7) {
 
-            System.out.println("\nSubMenu playlist:");
+            System.out.println("\n--- SubMenu Playlist ---");
             System.out.println("1 - Adicionar música a uma playlist");
             System.out.println("2 - Remover música de uma playlist");
             System.out.println("3 - Deletar uma playlist");
@@ -70,4 +70,5 @@ public class SubMenuPlaylist {
         }
     }
 }
+
 
