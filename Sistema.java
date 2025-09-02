@@ -57,31 +57,35 @@ public class Sistema {
         System.out.println("Playlist '" + nomePlaylist + "' criada com sucesso!");
     }
 
-    public void adicionarMidia(Scanner sc) throws DuracaoMusicaException, TipoDeMidiaInvalidoException, GeneroMusicalInvalidoException {
-        System.out.print("Digite o título da mídia: ");
-        String titulo = sc.nextLine();
-        System.out.print("Digite o nome do(a) artista da mídia: ");
-        String artista = sc.nextLine();
-        System.out.print("Qual a duração da mídia: ");
-        double duracao = sc.nextDouble();
-        sc.nextLine();
+   public void adicionarMidia(Scanner sc) throws DuracaoMusicaException, TipoDeMidiaInvalidoException, GeneroMusicalInvalidoException {
+	        System.out.print("Digite o título da mídia: ");
+	        String titulo = sc.nextLine();
+	        System.out.print("Digite o nome do(a) artista da mídia: ");
+	        String artista = sc.nextLine();
+	        System.out.print("Qual a duração da mídia: ");
+	        double duracao;
+	        try {
+	            duracao = Double.parseDouble(sc.nextLine());
+	        } catch (NumberFormatException e) {
+	            System.out.println("Duração inválida! Digite um número válido.");
+	            return;
+	        }
 
-        if (duracao <= 0) {
-            throw new DuracaoMusicaException("A duração da mídia deve ser maior que 0!");
-        }
+	        if (duracao <= 0) {
+	            throw new DuracaoMusicaException("A duração da mídia deve ser maior que 0!");
+	        }
 
-        System.out.print("Qual é o tipo de mídia que vai adicionar à playlist? (1 - Música, 2 - Podcast, 3 - Audiobook): ");
-        int opcaoMidia = sc.nextInt();
-        sc.nextLine();
+	        System.out.print("Qual é o tipo de mídia que vai adicionar à playlist? (1 - Música, 2 - Podcast, 3 - Audiobook): ");
+	        int opcaoMidia = sc.nextInt();
+	        sc.nextLine();
 
-        switch (opcaoMidia) {
-            case 1 -> adicionarMusicaMidia(sc, titulo, artista, duracao);
-            case 2 -> adicionarPodcastMidia(titulo, artista, duracao);
-            case 3 -> adicionarAudiobookMidia(titulo, artista, duracao);
-            default -> throw new TipoDeMidiaInvalidoException("Tipo de Mídia inválido!");
-        }
-    }
-
+	        switch (opcaoMidia) {
+	            case 1 -> adicionarMusicaMidia(sc, titulo, artista, duracao);
+	            case 2 -> adicionarPodcastMidia(titulo, artista, duracao);
+	            case 3 -> adicionarAudiobookMidia(titulo, artista, duracao);
+	            default -> throw new TipoDeMidiaInvalidoException("Tipo de Mídia inválido!");
+	        }
+	    }
     public void adicionarMusicaMidia(Scanner sc, String titulo, String artista, double duracao) throws GeneroMusicalInvalidoException {
         System.out.print("Digite o gênero musical (Clássica, Pop, Rock, Rap ou Mpb): ");
         String genero = sc.nextLine();
@@ -326,3 +330,4 @@ public class Sistema {
         }
     }
 }
+
