@@ -15,7 +15,8 @@ public class Musica extends Midia{
 		this.genero = genero;
 	}
 	@Override
-	public String toString() {
-		return "Musica [genero=" + genero + "]";
-	}
+public String toString() {
+    return "Musica [titulo=" + titulo + ", artista=" + artista + ", duracao=" + duracao + ", genero=" + genero + "]";
 }
+	}
+
