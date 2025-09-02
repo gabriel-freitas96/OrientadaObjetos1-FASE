@@ -31,6 +31,7 @@ public class SubMenuPlaylist {
                         } catch (PlaylistNaoEncontradaException e) {
                             System.out.println("Erro: " + e.getMessage());
                         }
+                        System.out.println("\n--------------------------\n");
                     }
 
                     case 2 -> {
@@ -39,18 +40,27 @@ public class SubMenuPlaylist {
                         } catch (PlaylistNaoEncontradaException | MusicaNaoEncontradaException e) {
                             System.out.println("Erro: " + e.getMessage());
                         }
+                        System.out.println("\n--------------------------\n");
                     }
 
                     case 3 -> {
-                        boolean sucesso = sistema.deletarPlaylist(sc);
-                        if (!sucesso) {
-                            System.out.println("Erro: Playlist não encontrada para deletar.");
-                        }
+                       sistema.deletarPlaylist(sc);
+                         System.out.println("\n--------------------------\n");
                     }
 
-                    case 4 -> sistema.atualizarNomePlaylist(sc);
+                    case 4 -> {
+                        try {
+                            sistema.atualizarNomePlaylist(sc);
+                        } catch (Exception e) {
+                            System.out.println("Erro ao atualizar o nome: " + e.getMessage());
+                        }
+                        System.out.println("\n--------------------------\n");
+                    }
 
-                    case 5 -> sistema.mostrarDuracaoTotalPlaylist(sc);
+                    case 5 -> { 
+                         sistema.mostrarDuracaoTotalPlaylist(sc);
+                        System.out.println("\n--------------------------\n");
+                    }
                     
                     case 6 -> {
                         try {
@@ -70,6 +80,7 @@ public class SubMenuPlaylist {
         }
     }
 }
+
 
 
 
