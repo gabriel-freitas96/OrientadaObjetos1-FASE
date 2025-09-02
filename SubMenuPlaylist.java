@@ -44,9 +44,13 @@ public class SubMenuPlaylist {
                     }
 
                     case 3 -> {
-                       sistema.deletarPlaylist(sc);
-                         System.out.println("\n--------------------------\n");
+                       try {
+                        sistema.deletarPlaylist(sc);
+                    } catch (Exception e) {
+                        System.out.println("Erro ao deletar playlist: " + e.getMessage());
                     }
+                    System.out.println("\n--------------------------\n");
+                }
 
                     case 4 -> {
                         try {
@@ -58,10 +62,13 @@ public class SubMenuPlaylist {
                     }
 
                     case 5 -> { 
-                         sistema.mostrarDuracaoTotalPlaylist(sc);
-                        System.out.println("\n--------------------------\n");
+                         try {
+                        sistema.mostrarDuracaoTotalPlaylist(sc);
+                    } catch (Exception e) {
+                        System.out.println("Erro ao calcular duração: " + e.getMessage());
                     }
-                    
+                    System.out.println("\n--------------------------\n");
+                }
                     case 6 -> {
                         try {
                             sistema.visualizarMusicasPlaylist(sc);
@@ -80,6 +87,7 @@ public class SubMenuPlaylist {
         }
     }
 }
+
 
 
 
