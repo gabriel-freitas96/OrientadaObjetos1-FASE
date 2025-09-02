@@ -2,7 +2,7 @@ package Usuario;
 
 import java.util.Objects;
 
-public class Midia {
+public abstract class Midia {
 	protected String titulo;
 	protected String artista;
 	protected double duracao;
