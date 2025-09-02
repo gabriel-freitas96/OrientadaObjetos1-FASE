@@ -237,4 +237,26 @@ public class Sistema {
         }
         System.out.printf("Duração total da playlist: %.2f minutos%n", total);
     }
+    public void visualizarMusicasPlaylist(Scanner sc) throws PlaylistNaoEncontradaException {
+        System.out.print("Digite o nome da playlist que deseja visualizar: ");
+        String nomePlaylist = sc.nextLine();
+
+        Playlist playlist = buscarPlaylistPeloNome(nomePlaylist);
+
+        if (playlist == null) {
+            throw new PlaylistNaoEncontradaException("Playlist não encontrada!");
+        }
+
+        ArrayList<Musica> musicas = playlist.getMusicas();
+
+        if (musicas.isEmpty()) {
+            System.out.println("A playlist está vazia.");
+        } else {
+            System.out.println("Músicas da playlist '" + playlist.getNome() + "':");
+            for (Musica musica : musicas) {
+                System.out.printf("- %s - %s (%.2f minutos)%n", 
+                    musica.getTitulo(), musica.getArtista(), musica.getDuracao());
+            }
+        }
+    }
 }
