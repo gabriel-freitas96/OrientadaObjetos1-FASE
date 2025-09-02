@@ -46,15 +46,6 @@ public class Catalogo {
   public String toString() {
 	return "Catalogo [midias=" + midias + "]";
   }
-
-  public void adicionarMidia(Midia midia) {
-	  midias.add(midia);
-  }
-  
-  
-
-  
-	
-  
  
 }
+
