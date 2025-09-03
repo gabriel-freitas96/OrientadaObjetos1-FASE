@@ -1,3 +1,5 @@
+package Usuario;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -5,7 +7,7 @@ public class Playlist {
     private String nome;
     private Usuario usuario;
     private ArrayList<Musica> musicas;
-    private double duracao;
+    protected int duracao;
 
     public Playlist(String nome, Usuario usuario, int duracao) {
         this.nome = nome;
@@ -79,4 +81,3 @@ public class Playlist {
 
 	
 }
-
