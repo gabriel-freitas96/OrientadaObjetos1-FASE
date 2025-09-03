@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package Usuario;
+
 import java.util.Objects;
 
 public class Usuario {
@@ -42,16 +43,10 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		return Objects.equals(email, other.email) && Objects.equals(nome, other.nome);
-				
+		return Objects.equals(email, other.email) && Objects.equals(nome, other.nome);			
 	}
-	
-	
-	
-	
 	@Override
 	public String toString() {
 		return "Usuario [nome=" + nome + ", email=" + email + "]";
 	}
 }
-
