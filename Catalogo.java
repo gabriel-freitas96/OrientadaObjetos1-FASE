@@ -1,3 +1,4 @@
+package Usuario;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -20,6 +21,9 @@ public class Catalogo {
   public void setMidias(ArrayList<Midia> midias) {
 	  this.midias = midias;
   	}
+  public void adicionarMidia(Midia midia) {
+      midias.add(midia);
+  }
   
   public void adicionarMidias(Midia playlist){
 	  midias.add(playlist);
@@ -48,4 +52,3 @@ public class Catalogo {
   }
  
 }
-
