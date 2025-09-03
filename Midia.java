@@ -1,3 +1,5 @@
+package Usuario;
+
 import java.util.Objects;
 
 public abstract class Midia {
@@ -66,4 +68,3 @@ public abstract class Midia {
 	}
 
 }
-
